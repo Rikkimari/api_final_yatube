@@ -4,6 +4,14 @@ from django.db import models
 User = get_user_model()
 
 
+class Group(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.title
+
+
 class Post(models.Model):
     text = models.TextField()
     pub_date = models.DateTimeField(
@@ -30,14 +38,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text
-
-
-class Group(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
-
-    def __str__(self):
-        return self.title
 
 
 class Comment(models.Model):
@@ -83,4 +83,3 @@ class Follow(models.Model):
                 name='unique_follow'
             ),
         )
-
