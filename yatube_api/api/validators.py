@@ -9,9 +9,8 @@ class ValidateFollowing:
         self.fields = fields
 
     def __call__(self, attrs):
-        list_fields = []
-        for i in range(len(self.fields)):
-            list_fields.append(attrs[self.fields[i]])
-        if len(self.fields) != len(set(list_fields)):
+        checked_field = [(attrs[self.fields[i]]) for i
+                         in range(len(self.fields))]
+        if len(self.fields) != len(set(checked_field)):
             raise serializers.ValidationError(
                 'Нельзя подписаться на себя')
